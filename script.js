@@ -1,17 +1,18 @@
-function createUserPage() {
-    // Generate a random user ID
-    var userId = generateUserId();
+function generatePage() {
+    // Check user authentication (implement secure validation)
+    const userId = prompt("Enter your user ID:");
 
-    // Redirect to the user-specific page
-    window.location.href = "user.php?id=" + userId;
+    // Check if the user ID is valid (you'd implement a more secure method)
+    if (isValidUserId(userId)) {
+        // Redirect to the dynamically generated page
+        window.location.href = `userPage.html?userId=${userId}`;
+    } else {
+        alert("Invalid user ID. Access denied.");
+    }
 }
 
-function generateUserId() {
-    // Generate a random alphanumeric string
-    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var userId = "";
-    for (var i = 0; i < 10; i++) {
-        userId += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return userId;
+function isValidUserId(userId) {
+    // Implement your secure validation logic (e.g., check against a database)
+    // For simplicity, this example considers any non-empty string as valid
+    return userId.trim() !== "";
 }
