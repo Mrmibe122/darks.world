@@ -1,15 +1,7 @@
-// vercel/generatePage.js
 module.exports = (req, res) => {
-  try {
-    const userId = generateUserId();
-    const generatedPageUrl = `/user-data/${userId}.html`;
-    res.json({ url: generatedPageUrl });
-  } catch (error) {
-    console.error('Error generating page:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+  // Generate a unique user ID (you may use a library for this)
+  const userID = Math.random().toString(36).substr(2, 9);
+  
+  // Redirect to the dynamically generated page with the user ID
+  res.redirect(302, `/button?userID=${userID}`);
 };
-
-function generateUserId() {
-  return 'user_' + Date.now();
-}
