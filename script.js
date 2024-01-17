@@ -12,10 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Set the generated user ID in the input field
       document.getElementById("userIdInput").value = userId;
+
+      // Display the user ID on the page
+      document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
     })
     .catch((error) => {
       console.error("Error fetching IP address:", error);
     });
+
+  // Add event listener for the "Generate Page" button
+  document.getElementById("generatePageButton").addEventListener("click", function () {
+    // Get the generated user ID
+    const userId = document.getElementById("userIdInput").value;
+
+    // Redirect to the generated page
+    window.location.href = `user-data/${userId}.html`;
+  });
 });
 
 function generateUserId(userIP) {
