@@ -2,7 +2,7 @@
 {
   "functions": {
     "api/generatePage.js": {
-      "runtime": "vercel/node@latest"
+      "runtime": "vercel/node@16"
     }
   }
 }
