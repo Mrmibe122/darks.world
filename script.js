@@ -1,24 +1,33 @@
 // script.js
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Auto-generate a user ID based on the user's IP address
-  const userId = generateUserId();
+document.addEventListener("DOMContentLoaded", async function () {
+  try {
+    // Fetch the user's IP address from ipify
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    const userIP = data.ip || "127.0.0.1"; // Use a default IP if fetching fails
 
-  // Set the generated user ID in the input field
-  document.getElementById("userIdInput").value = userId;
+    // Auto-generate a user ID based on the user's IP address
+    const userId = generateUserId(userIP);
 
-  // Display the user ID on the page (optional)
-  document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
+    // Set the generated user ID in the input field
+    document.getElementById("userIdInput").value = userId;
 
-  // Redirect to the generated page in the user-data directory
-  document.getElementById("generatePageButton").addEventListener("click", function () {
-    window.location.href = `user-data/${userId}.html`;
-  });
+    // Display the user ID on the page (optional)
+    document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
+
+    // Redirect to the generated page in the user-data directory
+    document.getElementById("generatePageButton").addEventListener("click", function () {
+      window.location.href = `user-data/${userId}.html`;
+    });
+  } catch (error) {
+    console.error("Error fetching user's IP:", error);
+  }
 });
 
-function generateUserId() {
-  // Generate a user ID based on the user's IP address (you can customize this logic)
-  return "user_" + hashCode(getUserIP());
+function generateUserId(userIP) {
+  // Generate a user ID based on the user's IP address
+  return "user_" + hashCode(userIP);
 }
 
 function hashCode(str) {
@@ -28,9 +37,4 @@ function hashCode(str) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
   return hash;
-}
-
-function getUserIP() {
-  // This is just a placeholder, you might need to use a more reliable method to get the user's IP
-  return "127.0.0.1";
 }
