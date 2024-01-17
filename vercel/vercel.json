@@ -1,8 +1,0 @@
-
-{
-  "functions": {
-    "api/generatePage.js": {
-      "runtime": "vercel/node"
-    }
-  }
-}
