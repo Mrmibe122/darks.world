@@ -39,10 +39,9 @@ window.addEventListener('beforeunload', function (event) {
   }
 
   // Cancel the event to prevent the browser from showing the leave confirmation dialog
-  event.preventDefault();
-  // Chrome requires returnValue to be set
   event.returnValue = '';
 });
+
 
   // Check for a stored user ID on page load and redirect to the home page if not found
   const storedUserID = sessionStorage.getItem('generatedUserID');
