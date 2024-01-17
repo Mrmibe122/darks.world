@@ -1,7 +1,8 @@
+// vercel.json
 {
   "functions": {
-    generatePage.js": {
-      "runtime": "vercel/node"
+    "generatePage.js": {
+      "runtime": "vercel/node@16"
     }
   }
 }
