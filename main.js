@@ -30,16 +30,17 @@ window.onload = function () {
   }
 };
 
-// Handle page refresh by using the sessionStorage to remember the generated user ID
-window.onbeforeunload = function () {
-  const userID = document.getElementById('generatePageButton').dataset.userID;
-  sessionStorage.setItem('generatedUserID', userID);
-};
-
 // Check for a stored user ID on page load and redirect to the home page if not found
-window.onload = function () {
-  const storedUserID = sessionStorage.getItem('generatedUserID');
-  if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
-    window.location.href = 'index.html';
-  }
-};
+document.addEventListener('DOMContentLoaded', function() {
+    const storedUserID = sessionStorage.getItem('generatedUserID');
+    if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
+        window.location.href = 'index.html';
+    }
+});
+
+// Handle page refresh by using the sessionStorage to remember the generated user ID
+document.getElementById('generatePageButton')?.addEventListener('click', function () {
+    const userID = document.getElementById('generatePageButton').dataset.userID;
+    sessionStorage.setItem('generatedUserID', userID);
+});
+
