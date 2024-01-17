@@ -1,41 +1,24 @@
 // script.js
 
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
-  // ... (existing code)
-    // Get the user's IP address
-  fetch("https://api64.ipify.org?format=json")
-    .then((response) => response.json())
-    .then((data) => {
-      const userIP = data.ip;
+  // Auto-generate a user ID based on the user's IP address
+  const userId = generateUserId();
 
-      // Generate a user ID based on the IP address
-      const userId = generateUserId(userIP);
+  // Set the generated user ID in the input field
+  document.getElementById("userIdInput").value = userId;
 
-      // Set the generated user ID in the input field
-      document.getElementById("userIdInput").value = userId;
+  // Display the user ID on the page (optional)
+  document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
 
-      // Display the user ID on the page
-      document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
-    })
-    .catch((error) => {
-      console.error("Error fetching IP address:", error);
-    });
- // Add event listener for the "Generate Page" button
+  // Redirect to the generated page in the user-data directory
   document.getElementById("generatePageButton").addEventListener("click", function () {
-    // Get the generated user ID
-    const userId = document.getElementById("userIdInput").value;
-
-    // Redirect to the generated page in the user-data directory
     window.location.href = `user-data/${userId}.html`;
   });
 });
 
-// ... (existing code)
-function generateUserId(userIP) {
-  // Generate a user ID based on the user's IP address
-  return "user_" + hashCode(userIP);
+function generateUserId() {
+  // Generate a user ID based on the user's IP address (you can customize this logic)
+  return "user_" + hashCode(getUserIP());
 }
 
 function hashCode(str) {
@@ -47,7 +30,7 @@ function hashCode(str) {
   return hash;
 }
 
-
-
-
-
+function getUserIP() {
+  // This is just a placeholder, you might need to use a more reliable method to get the user's IP
+  return "127.0.0.1";
+}
