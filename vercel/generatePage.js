@@ -2,9 +2,20 @@
 
 const crypto = require('crypto');
 
+// In-memory storage for user identifiers
+const userStorage = new Map();
+
 module.exports = async (req, res) => {
-  // Generate a unique user identifier for each request
-  const userId = generateUserId();
+  // Check if the user has an existing identifier
+  let userId = req.cookies.userId;
+
+  if (!userId) {
+    // If no identifier exists, generate a new one
+    userId = generateUserId();
+
+    // Store the identifier in the user's cookie
+    res.setHeader('Set-Cookie', `userId=${userId}; HttpOnly; Secure; SameSite=Strict`);
+  }
 
   // Here you can use the userId for further customization or storage
   const dynamicContent = `<h1>Welcome to Your Page, User ${userId}!</h1>`;
