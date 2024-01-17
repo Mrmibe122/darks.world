@@ -1,7 +1,24 @@
-module.exports = (req, res) => {
-  // Generate a unique user ID (you may use a library for this)
-  const userID = Math.random().toString(36).substr(2, 9);
-  
-  // Redirect to the dynamically generated page with the user ID
-  res.redirect(302, `/button?userID=${userID}`);
-};
+// Add an event listener to the button element
+document.getElementById('generatePageButton').addEventListener('click', generatePage);
+
+// Function to handle the button click
+function generatePage() {
+    // Make a request to the serverless function for dynamic page generation
+    fetch('/api/generate.js')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to generate page');
+            }
+        })
+        .then(data => {
+            // Redirect to the dynamically generated page with the user ID
+            window.location.href = `button.html?userID=${data.userID}`;
+        })
+        .catch(error => {
+            // Handle the error in a custom way, without logging to console
+            // You can add your custom error handling logic here
+            console.error("An error occurred, but it will not be logged to the console:", error);
+        });
+}
