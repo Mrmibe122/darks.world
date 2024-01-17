@@ -19,7 +19,7 @@ function generatePage() {
     });
 }
 
-document.getElementById('generatePageButton').addEventListener('click', generatePage);
+document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
 
 // Check for invalid user ID in the URL and redirect to the home page
 window.onload = function () {
