@@ -1,7 +1,3 @@
-// Add an event listener to the button element
-document.getElementById('generatePageButton').addEventListener('click', generatePage);
-
-// Function to handle the button click
 function generatePage() {
     // Make a request to the serverless function for dynamic page generation
     fetch('/api/generate')
@@ -22,3 +18,5 @@ function generatePage() {
             console.error("An error occurred, but it will not be logged to the console:", error);
         });
 }
+
+document.getElementById('generatePageButton').addEventListener('click', generatePage);
