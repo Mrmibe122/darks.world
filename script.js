@@ -3,9 +3,9 @@
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     // Fetch the user's IP address from ipify
-    const response = await fetch("https://api.ipify.org?format=json");
-    const data = await response.json();
-    const userIP = data.ip || "127.0.0.1"; // Use a default IP if fetching fails
+    const ipResponse = await fetch("https://api.ipify.org?format=json");
+    const ipData = await ipResponse.json();
+    const userIP = ipData.ip || "127.0.0.1"; // Use a default IP if fetching fails
 
     // Auto-generate a user ID based on the user's IP address
     const userId = generateUserId(userIP);
@@ -16,9 +16,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Display the user ID on the page (optional)
     document.getElementById("userIdDisplay").innerText = `Your User ID: ${userId}`;
 
-    // Redirect to the generated page in the user-data directory
-    document.getElementById("generatePageButton").addEventListener("click", function () {
-      window.location.href = `user-data/${userId}.html`;
+    // Add event listener for the "Generate Page" button
+    document.getElementById("generatePageButton").addEventListener("click", async function () {
+      try {
+        // Fetch the generated page URL from the serverless function
+        const response = await fetch('/api/generatePage');
+        const data = await response.json();
+        const generatedPageUrl = data.url;
+
+        // Redirect to the generated page
+        window.location.href = generatedPageUrl;
+      } catch (error) {
+        console.error("Error fetching generated page URL:", error);
+      }
     });
   } catch (error) {
     console.error("Error fetching user's IP:", error);
