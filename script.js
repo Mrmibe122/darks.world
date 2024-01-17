@@ -1,7 +1,10 @@
 // script.js
 
+// script.js
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Get the user's IP address
+  // ... (existing code)
+    // Get the user's IP address
   fetch("https://api64.ipify.org?format=json")
     .then((response) => response.json())
     .then((data) => {
@@ -19,17 +22,17 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("Error fetching IP address:", error);
     });
-
-  // Add event listener for the "Generate Page" button
+ // Add event listener for the "Generate Page" button
   document.getElementById("generatePageButton").addEventListener("click", function () {
     // Get the generated user ID
     const userId = document.getElementById("userIdInput").value;
 
-    // Redirect to the generated page
+    // Redirect to the generated page in the user-data directory
     window.location.href = `user-data/${userId}.html`;
   });
 });
 
+// ... (existing code)
 function generateUserId(userIP) {
   // Generate a user ID based on the user's IP address
   return "user_" + hashCode(userIP);
@@ -43,3 +46,8 @@ function hashCode(str) {
   }
   return hash;
 }
+
+
+
+
+
