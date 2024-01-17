@@ -1,20 +1,19 @@
 // vercel/generatePage.js
 
+const crypto = require('crypto');
+
 module.exports = async (req, res) => {
-  const userId = req.query.userId;
+  // Generate a random authentication token
+  const authToken = generateAuthToken();
 
-  // Check if the user ID is valid (add your own validation logic)
-  if (!isValidUserId(userId)) {
-    return res.status(400).json({ error: "Invalid user ID" });
-  }
+  // Here you can use the authToken for further authentication/authorization checks
+  // For simplicity, let's just include it in the dynamic content
+  const dynamicContent = `<h1>Welcome to Your Page! Your Auth Token: ${authToken}</h1>`;
 
-  // Here you can generate dynamic content for the user
-  const dynamicContent = `<h1>Welcome to Your Page, ${userId}!</h1>`;
-
-  res.status(200).json({ html: dynamicContent });
+  res.status(200).json({ html: dynamicContent, authToken });
 };
 
-function isValidUserId(userId) {
-  // Implement your validation logic (e.g., length, format)
-  return userId && userId.trim().length > 0;
+function generateAuthToken() {
+  // Generate a random token using Node.js crypto module
+  return crypto.randomBytes(32).toString('hex');
 }
