@@ -1,35 +1,33 @@
 // script.js
 
-function generatePage() {
-    const userId = prompt("Enter your user ID:");
-    
-    if (isValidUserId(userId)) {
-        const authToken = generateAuthToken();
-        saveAuthToken(userId, authToken);
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the user's IP address
+  fetch("https://api64.ipify.org?format=json")
+    .then((response) => response.json())
+    .then((data) => {
+      const userIP = data.ip;
 
-        // Redirect to the user's page with the generated user ID and auth token
-        window.location.href = `userPage.html?userId=${userId}&token=${authToken}`;
-    } else {
-        alert("Invalid user ID. Access denied.");
-    }
+      // Generate a user ID based on the IP address
+      const userId = generateUserId(userIP);
+
+      // Set the generated user ID in the input field
+      document.getElementById("userIdInput").value = userId;
+    })
+    .catch((error) => {
+      console.error("Error fetching IP address:", error);
+    });
+});
+
+function generateUserId(userIP) {
+  // Generate a user ID based on the user's IP address
+  return "user_" + hashCode(userIP);
 }
 
-function isValidUserId(userId) {
-    // Implement your validation logic (e.g., length, format)
-    return userId && userId.trim().length > 0;
-}
-
-function generateAuthToken() {
-    // Generate a simple authentication token (for simulation purposes)
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let authToken = '';
-    for (let i = 0; i < 16; i++) {
-        authToken += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return authToken;
-}
-
-function saveAuthToken(userId, authToken) {
-    // Save the authentication token to localStorage
-    localStorage.setItem(userId, authToken);
+function hashCode(str) {
+  // Simple hash function to convert the IP address to a number
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
 }
