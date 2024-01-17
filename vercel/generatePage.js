@@ -1,18 +1,14 @@
 // vercel/generatePage.js
 
-const crypto = require('crypto');
+module.exports = (req, res) => {
+  // Your dynamic page generation logic here
+  const generatedPageUrl = `/user-data/${generateUserId()}.html`;
 
-module.exports = async (req, res) => {
-  // Generate a random identifier for each request
-  const requestId = generateRandomId();
-
-  // Here you can use the requestId for further customization or storage
-  const dynamicContent = `<h1>Welcome to Your Page, Request ${requestId}!</h1>`;
-
-  res.status(200).json({ html: dynamicContent, requestId });
+  // Return the generated page URL
+  res.json({ url: generatedPageUrl });
 };
 
-function generateRandomId() {
-  // Generate a random identifier using Node.js crypto module
-  return crypto.randomBytes(16).toString('hex');
+function generateUserId() {
+  // Your user ID generation logic here
+  return "user_" + Math.floor(Math.random() * 1000);
 }
