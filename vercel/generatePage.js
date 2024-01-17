@@ -3,19 +3,16 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
-  // Get the user's IP address from the request
-  const userIP = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  // Generate a random identifier for each request
+  const requestId = generateRandomId();
 
-  // Generate a unique identifier based on the user's IP
-  const userId = generateUserId(userIP);
+  // Here you can use the requestId for further customization or storage
+  const dynamicContent = `<h1>Welcome to Your Page, Request ${requestId}!</h1>`;
 
-  // Here you can use the userId for further customization or storage
-  const dynamicContent = `<h1>Welcome to Your Page, User ${userId}!</h1>`;
-
-  res.status(200).json({ html: dynamicContent, userId });
+  res.status(200).json({ html: dynamicContent, requestId });
 };
 
-function generateUserId(userIP) {
-  // Generate a unique identifier using Node.js crypto module and user's IP
-  return crypto.createHash('md5').update(userIP).digest('hex');
+function generateRandomId() {
+  // Generate a random identifier using Node.js crypto module
+  return crypto.randomBytes(16).toString('hex');
 }
