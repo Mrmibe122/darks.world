@@ -1,8 +1,9 @@
-// vercel.json
 {
-  "functions": {
-    "generatePage.js": {
-      "runtime": "vercel/node"
-    }
-  }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/button", "dest": "/button.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
+
+
