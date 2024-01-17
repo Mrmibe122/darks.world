@@ -31,13 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'index.html';
   }
 
-  // Handle page refresh by using the sessionStorage to remember the generated user ID
-  window.addEventListener('beforeunload', function () {
-    const userID = document.getElementById('generatePageButton')?.dataset.userID;
-    if (userID) {
-      sessionStorage.setItem('generatedUserID', userID);
-    }
-  });
+// Handle page refresh by using the sessionStorage to remember the generated user ID
+window.addEventListener('beforeunload', function (event) {
+  const userID = document.getElementById('generatePageButton')?.dataset.userID;
+  if (userID) {
+    sessionStorage.setItem('generatedUserID', userID);
+  }
+
+  // Cancel the event to prevent the browser from showing the leave confirmation dialog
+  event.preventDefault();
+  // Chrome requires returnValue to be set
+  event.returnValue = '';
+});
 
   // Check for a stored user ID on page load and redirect to the home page if not found
   const storedUserID = sessionStorage.getItem('generatedUserID');
