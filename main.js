@@ -1,15 +1,3 @@
-// Wrap your code in a function to ensure it runs after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Add an event listener to the button element
-  document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
-
-  // Check for a stored user ID on page load and redirect to the home page if not found
-  const storedUserID = sessionStorage.getItem('generatedUserID');
-  if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
-    window.location.href = 'index.html';
-  }
-});
-
 // Function to handle the button click
 function generatePage() {
   // Make a request to the serverless function for dynamic page generation
@@ -32,10 +20,22 @@ function generatePage() {
     });
 }
 
-// Handle page refresh by using the sessionStorage to remember the generated user ID
-window.addEventListener('beforeunload', function () {
-  const userID = document.getElementById('generatePageButton')?.dataset.userID;
-  if (userID) {
-    sessionStorage.setItem('generatedUserID', userID);
+// Wrap your code in a function to ensure it runs after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Check for a stored user ID on page load and redirect to the home page if not found
+  const storedUserID = sessionStorage.getItem('generatedUserID');
+  if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
+    window.location.href = 'index.html';
   }
+
+  // Add an event listener to the button element
+  document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
+
+  // Handle page refresh by using the sessionStorage to remember the generated user ID
+  window.addEventListener('beforeunload', function () {
+    const userID = document.getElementById('generatePageButton')?.dataset.userID;
+    if (userID) {
+      sessionStorage.setItem('generatedUserID', userID);
+    }
+  });
 });
