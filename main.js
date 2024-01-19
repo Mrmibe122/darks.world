@@ -1,7 +1,7 @@
 // Function to handle the button click
 function generatePage() {
   // Make a request to the serverless function for dynamic page generation
-  fetch('/api/generate')
+  fetch('/api/generate.js')
     .then(response => {
       if (response.ok) {
         return response.json();
