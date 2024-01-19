@@ -1,3 +1,16 @@
+// Wrap your code in a function to ensure it runs after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Add an event listener to the button element
+  document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
+
+  // Check for a stored user ID on page load and redirect to the home page if not found
+  const storedUserID = sessionStorage.getItem('generatedUserID');
+  if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
+    window.location.href = 'index.html';
+  }
+});
+
+// Function to handle the button click
 function generatePage() {
   // Make a request to the serverless function for dynamic page generation
   fetch('/api/generate')
@@ -19,33 +32,10 @@ function generatePage() {
     });
 }
 
-// Wrap your code in a function to ensure it runs after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Add an event listener to the button element
-  document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
-
-  // Check for invalid user ID in the URL and redirect to the home page
-  const params = new URLSearchParams(window.location.search);
-  const userID = params.get('userID');
-  if (!userID || !/^[a-zA-Z0-9]{9}$/.test(userID)) {
-    window.location.href = 'index.html';
-  }
-
 // Handle page refresh by using the sessionStorage to remember the generated user ID
-window.addEventListener('beforeunload', function (event) {
+window.addEventListener('beforeunload', function () {
   const userID = document.getElementById('generatePageButton')?.dataset.userID;
   if (userID) {
     sessionStorage.setItem('generatedUserID', userID);
-  }
-
-  // Cancel the event to prevent the browser from showing the leave confirmation dialog
-  event.returnValue = '';
-});
-
-
-  // Check for a stored user ID on page load and redirect to the home page if not found
-  const storedUserID = sessionStorage.getItem('generatedUserID');
-  if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
-    window.location.href = 'index.html';
   }
 });
