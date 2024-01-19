@@ -20,9 +20,8 @@ function generatePage() {
     });
 }
 
-// Wrap your code in a function to ensure it runs after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Check for a stored user ID on page load and redirect to the home page if not found
+// Check for a stored user ID on page load and redirect to the home page if not found
+document.addEventListener('DOMContentLoaded', function () {
   const storedUserID = sessionStorage.getItem('generatedUserID');
   if (!storedUserID || !/^[a-zA-Z0-9]{9}$/.test(storedUserID)) {
     window.location.href = 'index.html';
@@ -33,13 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (generatePageButton) {
     generatePageButton.addEventListener('click', generatePage);
   }
-});
 
-// Handle page refresh by using the sessionStorage to remember the generated user ID
-window.addEventListener('beforeunload', function () {
-  const userID = document.getElementById('generatePageButton')?.dataset.userID;
-  if (userID) {
-    sessionStorage.setItem('generatedUserID', userID);
-  }
+  // Handle page refresh by using the sessionStorage to remember the generated user ID
+  window.addEventListener('beforeunload', function () {
+    const userID = generatePageButton?.dataset.userID;
+    if (userID) {
+      sessionStorage.setItem('generatedUserID', userID);
+    }
+  });
 });
-
