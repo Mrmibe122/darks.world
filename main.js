@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add an event listener to the button element
   document.getElementById('generatePageButton')?.addEventListener('click', generatePage);
+});
 
-  // Handle page refresh by using the sessionStorage to remember the generated user ID
-  window.addEventListener('beforeunload', function () {
-    const userID = document.getElementById('generatePageButton')?.dataset.userID;
-    if (userID) {
-      sessionStorage.setItem('generatedUserID', userID);
-    }
-  });
+// Handle page refresh by using the sessionStorage to remember the generated user ID
+window.addEventListener('beforeunload', function () {
+  const userID = document.getElementById('generatePageButton')?.dataset.userID;
+  if (userID) {
+    sessionStorage.setItem('generatedUserID', userID);
+  }
 });
