@@ -1,9 +1,0 @@
-{
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/button", "dest": "/button.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
-
-
