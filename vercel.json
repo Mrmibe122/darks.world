@@ -1,13 +1,13 @@
 {
   "functions": {
     "api/generateUserId": {
-      "runtime": "nodejs@14.21.3"
+      "runtime": "Node.js v14.21.3"
     },
     "api/generatePage": {
-      "runtime": "nodejs@14.21.3"
+      "runtime": "Node.js v14.21.3"
     },
     "api/deletePage": {
-      "runtime": "nodejs@14.21.3"
+      "runtime": "Node.js v14.21.3"
     }
   }
 }
