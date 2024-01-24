@@ -1,22 +1,15 @@
+// script.js
 document.addEventListener('DOMContentLoaded', () => {
-  const generateKeyBtn = document.getElementById('generateKeyBtn');
+  const generatePageBtn = document.getElementById('generatePageBtn');
 
-  generateKeyBtn.addEventListener('click', async () => {
-    const ipAddress = await getUserIpAddress();
-    const key = await generateUserKey(ipAddress);
-    alert(`Your generated key: ${key}`);
+  generatePageBtn.addEventListener('click', async () => {
+    const userId = await generateUserId();
+    window.location.href = `/user/${userId}`;
   });
 
-  async function getUserIpAddress() {
-    // Use a third-party service to get the user's public IP address
-    const response = await fetch('https://api64.ipify.org?format=json');
+  async function generateUserId() {
+    const response = await fetch('/api/generateUserId');
     const data = await response.json();
-    return data.ip;
-  }
-
-  async function generateUserKey(ipAddress) {
-    const response = await fetch(`/api/generateKey?ipAddress=${ipAddress}`);
-    const data = await response.json();
-    return data.key;
+    return data.userId;
   }
 });
