@@ -1,13 +1,13 @@
 {
   "functions": {
     "api/generateUserId": {
-      "runtime": "node@18.x"
+      "runtime": "node@16.x"
     },
     "api/generatePage": {
-      "runtime": "node@18.x"
+      "runtime": "node@16.x"
     },
     "api/deletePage": {
-      "runtime": "node@18.x"
+      "runtime": "node@16.x"
     }
   }
 }
