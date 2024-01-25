@@ -1,13 +1,7 @@
 {
   "functions": {
-    "api/generateUserId": {
-      "runtime": "node@16.x"
-    },
-    "api/generatePage": {
-      "runtime": "node@16.x"
-    },
-    "api/deletePage": {
-      "runtime": "node@16.x"
-    }
+    "api/generateUserId": {},
+    "api/generatePage": {},
+    "api/deletePage": {}
   }
 }
