@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   generatePageBtn.addEventListener('click', async () => {
     const userId = await generateUserId();
-    window.location.href = `/user/${userId}`;
+    window.location.href = `/${userId}`;
   });
 
   async function generateUserId() {
