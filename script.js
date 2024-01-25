@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   generatePageBtn.addEventListener('click', async () => {
     const userId = await generateUserId();
+    
+    // Call the generatePage API to create a user-specific page
+    await fetch(`/api/generatePage?userId=${userId}`, { method: 'POST' });
+    
+    // Redirect to the user-specific page
     window.location.href = `/${userId}`;
   });
 
