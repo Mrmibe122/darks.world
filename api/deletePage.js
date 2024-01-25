@@ -1,12 +1,33 @@
 // api/deletePage.js
+import fs from 'fs/promises';
+import path from 'path';
+
 export default async function handler(req, res) {
-  const { userId } = req.query;
+  const userId = req.query.userId;
 
   if (!userId) {
     return res.status(400).json({ error: 'User ID is required' });
   }
 
-  // Add logic to delete the user-specific page or clear the associated data
+  // Set the path for user-specific pages
+  const userPagesDirectory = path.join(process.cwd(), 'userPages');
+  const userPagePath = path.join(userPagesDirectory, `${userId}.html`);
 
-  res.json({ success: true });
+  try {
+    // Check if the user-specific page exists
+    await fs.access(userPagePath);
+
+    // If exists, delete the user-specific HTML file
+    await fs.unlink(userPagePath);
+    console.log(`User-specific page for ${userId} deleted.`);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.error(`User-specific page for ${userId} not found.`);
+      return res.status(404).json({ error: 'User Page Not Found' });
+    } else {
+      console.error(`Error deleting user-specific page for ${userId}: ${err.message}`);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
