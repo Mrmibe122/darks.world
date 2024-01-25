@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/generateUserId": {},
-    "api/generatePage": {},
-    "api/deletePage": {}
-  }
-}
