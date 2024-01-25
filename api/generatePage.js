@@ -1,17 +1,28 @@
 // api/generatePage.js
-import crypto from 'crypto';
+import fs from 'fs/promises';
+import path from 'path';
 
 export default async function handler(req, res) {
-  const userId = generateUserId();
-  const pageUrl = `/user/${userId}`;
+  const userId = req.query.userId;
 
-  // You can save userId and pageUrl to a database for future reference
+  if (!userId) {
+    return res.status(400).json({ error: 'User ID is required' });
+  }
 
-  // Send the generated userId to the frontend
-  res.json({ userId });
-}
+  // Assuming you want to create a user-specific HTML file
+  const generatedPageContent = `<html><head><title>User Page</title></head><body><h1>Hello, User ${userId}!</h1></body></html>`;
 
-function generateUserId() {
-  // Generate a unique and secure user ID (you can use a more complex logic)
-  return crypto.randomBytes(16).toString('hex');
+  // Set the path for user-specific pages
+  const userPagesDirectory = path.join(process.cwd(), 'userPages');
+  const userPagePath = path.join(userPagesDirectory, `${userId}.html`);
+
+  try {
+    // Write the generated content to the user-specific HTML file
+    await fs.writeFile(userPagePath, generatedPageContent, 'utf-8');
+    console.log(`User-specific page for ${userId} created.`);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error(`Error creating user-specific page for ${userId}: ${err.message}`);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
