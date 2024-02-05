@@ -1,22 +1,9 @@
-function createRaindrops() {
-    var container = document.querySelector('.container');
-    var screenHeight = container.clientHeight;
-
-    for (var i = 0; i < 100; i++) {
-        var raindrop = document.createElement('div');
-        raindrop.className = 'raindrop';
-        container.appendChild(raindrop);
-
-        animateRaindrop(raindrop, screenHeight);
-    }
-}
-
 function animateRaindrop(raindrop, screenHeight) {
     var container = document.querySelector('.container');
     var screenWidth = container.clientWidth;
 
     var startPositionX = Math.random() * screenWidth;
-    var startPositionY = -10; // Start above the container
+    var startPositionY = Math.random() * screenHeight;
     var endPositionX = startPositionX + Math.random() * 20 - 10;
     var endPositionY = screenHeight + 10; // End below the container
 
