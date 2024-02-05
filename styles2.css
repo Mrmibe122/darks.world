@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #f2f2f2; /* Set background color to gray */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background-color: #3498db;
+    animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Modern Button Styles */
+.button {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
