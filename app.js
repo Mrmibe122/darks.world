@@ -37,5 +37,5 @@ function animateRaindrop(raindrop, screenHeight) {
 }
 
 function executeCode() {
-    window.location.href = "https://www.example.com"; // Replace with your desired URL
+    window.location.href = "https://loot-link.com/s?odiH"; // Replace with your desired URL
 }
