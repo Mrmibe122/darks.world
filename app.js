@@ -28,7 +28,11 @@ function animateRaindrop(raindrop) {
     raindrop.style.animation = 'fall ' + duration + 's linear infinite';
 
     raindrop.addEventListener('animationiteration', function () {
-        // Reset raindrop position for next iteration
+        // Reset raindrop position for the next iteration
         raindrop.style.left = startPositionX + 'px';
     });
+}
+
+function executeCode() {
+    window.location.href = "https://www.example.com"; // Replace with your desired URL
 }
