@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    background-color: #f2f2f2; /* Set background color to gray */
 }
 
 .container {
