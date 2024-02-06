@@ -37,5 +37,5 @@ function animateRaindrop(raindrop, screenHeight) {
 }
 
 function executeCode() {
-    window.location.href = "https://lootdest.com/s?odjM"; // Replace with your desired URL
+    window.location.href = "https://loot-link.com/s?odjM"; // Replace with your desired URL
 }
